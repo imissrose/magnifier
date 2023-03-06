@@ -1,0 +1,24 @@
+/*canvas {
+    border: 1px solid black;
+    margin: 20px;
+  }*/
+
+  #canvas-container {
+    position: relative;
+  }
+  #magnifier-container {
+    position: absolute;
+    display: none;
+  }
+  #magnifier {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 2px solid black;
+    overflow: hidden;
+  }
+  #magnifier canvas {
+    width: 100%;
+    height: 100%;
+  }
