@@ -2,6 +2,9 @@ const video = document.querySelector('video');
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 const magnifier = document.getElementById('magnifier');
+const magnifierCanvas = document.getElementById('magnifier-canvas');
+const magnifierContext = magnifierCanvas.getContext('2d');
+
 const scale = 2;
 
 let isVisible = true;
@@ -11,7 +14,8 @@ document.addEventListener('visibilitychange', () => {
   isVisible = !document.hidden;
 });
 
-navigator.mediaDevices.getUserMedia({ video: true })
+//navigator.mediaDevices.getUserMedia({ video: true })
+navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } })
   .then(stream => {
     video.srcObject = stream;
     video.play();
@@ -31,7 +35,7 @@ function render() {
     const y = Math.floor(magnifier.offsetTop / scale);
     const width = Math.floor(magnifier.offsetWidth / scale);
     const height = Math.floor(magnifier.offsetHeight / scale);
-    context.drawImage(image, x, y, width, height, 0, 0, canvas.width, canvas.height);
+    magnifierContext.drawImage(image, x, y, width, height, 0, 0, canvas.width, canvas.height);
   };
   requestAnimationFrame(render); // 재귀 호출
 }
